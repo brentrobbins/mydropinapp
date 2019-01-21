@@ -6,7 +6,7 @@ export const onCreateGroup = `subscription OnCreateGroup {
     id
     title
     description
-    Events {
+    events {
       items {
         id
         title
@@ -27,7 +27,7 @@ export const onUpdateGroup = `subscription OnUpdateGroup {
     id
     title
     description
-    Events {
+    events {
       items {
         id
         title
@@ -48,7 +48,7 @@ export const onDeleteGroup = `subscription OnDeleteGroup {
     id
     title
     description
-    Events {
+    events {
       items {
         id
         title
@@ -77,11 +77,11 @@ export const onCreateEvent = `subscription OnCreateEvent {
       country
     }
     eventAt
-    Group {
+    group {
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -106,11 +106,11 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
       country
     }
     eventAt
-    Group {
+    group {
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -135,11 +135,11 @@ export const onDeleteEvent = `subscription OnDeleteEvent {
       country
     }
     eventAt
-    Group {
+    group {
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner

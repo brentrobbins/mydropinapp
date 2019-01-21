@@ -22,7 +22,7 @@ const Navbar = ({ user, handleSignout }) => (
       {/* Navbar Items */}
       <div className="nav-itms">
         <Nav.Item index="2">
-          <span className="app-user">Hello, {user.username}</span>
+          <span className="app-user">Hello, {user.firstName}</span>
         </Nav.Item>
 
         <Nav.Item index="3">

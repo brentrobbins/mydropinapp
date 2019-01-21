@@ -3,7 +3,7 @@ import { graphqlOperation } from "aws-amplify";
 import { Connect } from "aws-amplify-react";
 import { listGroups } from "../graphql/queries";
 import { onCreateGroup } from "../graphql/subscriptions";
-import { Loading, Card, Icon } from "element-react";
+import { Loading, Card } from "element-react";
 import { Link } from "react-router-dom";
 import Error from "./Error";
 
@@ -41,7 +41,7 @@ const GroupList = () => {
               <div key={group.id} className="my-2">
                 <Card
                   bodyStyle={{
-                    padding: "0.07em",
+                    padding: ".7em",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between"

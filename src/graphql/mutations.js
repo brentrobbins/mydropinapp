@@ -6,7 +6,7 @@ export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
     id
     title
     description
-    Events {
+    events {
       items {
         id
         title
@@ -27,7 +27,7 @@ export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
     id
     title
     description
-    Events {
+    events {
       items {
         id
         title
@@ -48,7 +48,7 @@ export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
     id
     title
     description
-    Events {
+    events {
       items {
         id
         title
@@ -77,11 +77,11 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
       country
     }
     eventAt
-    Group {
+    group {
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -106,11 +106,11 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
       country
     }
     eventAt
-    Group {
+    group {
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -135,11 +135,11 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
       country
     }
     eventAt
-    Group {
+    group {
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -188,7 +188,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
 export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
   createOrder(input: $input) {
     id
-    Event {
+    event {
       id
       title
       location {
@@ -200,7 +200,7 @@ export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
         country
       }
       eventAt
-      Group {
+      group {
         id
         title
         description

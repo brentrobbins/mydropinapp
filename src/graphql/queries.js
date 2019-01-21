@@ -6,7 +6,7 @@ export const getGroup = `query GetGroup($id: ID!) {
     id
     title
     description
-    Events {
+    events {
       items {
         id
         title
@@ -32,7 +32,7 @@ export const listGroups = `query ListGroups(
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -55,11 +55,11 @@ export const getEvent = `query GetEvent($id: ID!) {
       country
     }
     eventAt
-    Group {
+    group {
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -89,7 +89,7 @@ export const listEvents = `query ListEvents(
         country
       }
       eventAt
-      Group {
+      group {
         id
         title
         description
@@ -137,7 +137,7 @@ export const searchGroups = `query SearchGroups(
       id
       title
       description
-      Events {
+      events {
         nextToken
       }
       owner
@@ -171,7 +171,7 @@ export const searchEvents = `query SearchEvents(
         country
       }
       eventAt
-      Group {
+      group {
         id
         title
         description

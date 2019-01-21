@@ -20,7 +20,7 @@ class NewGroup extends React.Component {
       const input = {
         title: this.state.title,
         description: this.state.description,
-        owner: user.username
+        owner: user.attributes.sub
       };
       const result = await API.graphql(
         graphqlOperation(createGroup, { input })

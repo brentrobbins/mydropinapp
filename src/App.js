@@ -69,14 +69,13 @@ class App extends React.Component {
             <Navbar user={user} handleSignout={this.handleSignout} />
 
             {/* Routes */}
-            <div className="app-contaier">
+            <div className="app-container">
               <Route exact path="/" component={HomePage} />
               <Route exact path="/profile" component={ProfilePage} />
               <Route
-                exact
                 path="/groups/:groupId"
-                component={match => (
-                  <GroupPage groupId={match.params.groupId} />
+                component={({ match }) => (
+                  <GroupPage user={user} groupId={match.params.groupId} />
                 )}
               />
             </div>
