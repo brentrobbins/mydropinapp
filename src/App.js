@@ -1,13 +1,17 @@
 import React from "react";
 import { Auth, Hub } from "aws-amplify";
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import createBrowserHistory from "history/createBrowserHistory";
+
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import GroupPage from "./pages/GroupPage";
 import Navbar from "./components/NavBar";
 
 import "./App.css";
+
+export const history = createBrowserHistory();
 
 export const UserContext = React.createContext();
 
@@ -63,7 +67,7 @@ class App extends React.Component {
       <Authenticator theme={theme} />
     ) : (
       <UserContext.Provider value={{ user }}>
-        <Router>
+        <Router history={history}>
           <React.Fragment>
             {/* Navigation */}
             <Navbar user={user} handleSignout={this.handleSignout} />
@@ -71,7 +75,11 @@ class App extends React.Component {
             {/* Routes */}
             <div className="app-container">
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/profile" component={ProfilePage} />
+              <Route
+                exact
+                path="/profile"
+                component={() => <ProfilePage user={user} />}
+              />
               <Route
                 path="/groups/:groupId"
                 component={({ match }) => (

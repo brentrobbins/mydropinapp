@@ -212,3 +212,38 @@ export const searchUsers = `query SearchUsers(
   }
 }
 `;
+export const searchOrders = `query SearchOrders(
+  $filter: SearchableOrderFilterInput
+  $sort: SearchableOrderSortInput
+  $limit: Int
+  $nextToken: Int
+) {
+  searchOrders(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      event {
+        id
+        title
+        eventAt
+        price
+        owner
+        createdAt
+      }
+      user {
+        id
+        firstName
+        lastName
+        email
+        registered
+      }
+      createdAt
+    }
+    nextToken
+  }
+}
+`;
