@@ -154,6 +154,7 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
 export const registerUser = `mutation RegisterUser($input: CreateUserInput!) {
   registerUser(input: $input) {
     id
+    username
     firstName
     lastName
     email
@@ -171,6 +172,7 @@ export const registerUser = `mutation RegisterUser($input: CreateUserInput!) {
 export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
     id
+    username
     firstName
     lastName
     email
@@ -213,6 +215,7 @@ export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
     }
     user {
       id
+      username
       firstName
       lastName
       email

@@ -107,6 +107,7 @@ export const listEvents = `query ListEvents(
 export const getUser = `query GetUser($id: ID!) {
   getUser(id: $id) {
     id
+    username
     firstName
     lastName
     email
@@ -200,6 +201,7 @@ export const searchUsers = `query SearchUsers(
   ) {
     items {
       id
+      username
       firstName
       lastName
       email
@@ -236,6 +238,7 @@ export const searchOrders = `query SearchOrders(
       }
       user {
         id
+        username
         firstName
         lastName
         email
