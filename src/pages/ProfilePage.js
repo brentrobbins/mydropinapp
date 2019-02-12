@@ -35,8 +35,11 @@ class ProfilePage extends React.Component {
   state = {
     yourId: this.props.userAttributes && this.props.userAttributes.sub,
     email: this.props.userAttributes && this.props.userAttributes.email,
+    firstName: "",
+    lastName: "",
     emailDialog: false,
     firstNameDialog: false,
+    lastNameDialog: false,
     verificationCode: "",
     verificationForm: false,
     orders: [],
@@ -83,6 +86,17 @@ class ProfilePage extends React.Component {
                 </Button>
               );
 
+            case "Last Name":
+              return (
+                <Button
+                  onClick={() => this.setState({ lastNameDialog: true })}
+                  type="info"
+                  size="small"
+                >
+                  Edit
+                </Button>
+              );
+
             case "Delete Profile":
               return (
                 <Button
@@ -104,6 +118,7 @@ class ProfilePage extends React.Component {
   componentDidMount() {
     if (this.props.userAttributes) {
       this.getUserOrders(this.props.userAttributes.sub);
+      this.getUserDetails(this.props.userAttributes.sub);
     }
   }
 
@@ -111,6 +126,15 @@ class ProfilePage extends React.Component {
     const input = { id: userId };
     const result = await API.graphql(graphqlOperation(getUser, input));
     this.setState({ orders: result.data.getUser.orders.items });
+  };
+
+  getUserDetails = async userId => {
+    const input = { id: userId };
+    const result = await API.graphql(graphqlOperation(getUser, input));
+    this.setState({
+      firstName: result.data.getUser.firstName,
+      lastName: result.data.getUser.lastName
+    });
   };
 
   handleUpdateEmail = async () => {
@@ -123,7 +147,7 @@ class ProfilePage extends React.Component {
         updatedAttributes
       );
       if (result === "SUCCESS") {
-        this.sendVerificationCode("email");
+        this.sendVerificationCode("emai l");
       }
     } catch (err) {
       console.error(err);
@@ -134,18 +158,38 @@ class ProfilePage extends React.Component {
     }
   };
 
-  // UPDATE
+  // Update First Name
   handleUpdateFirstName = async () => {
-    //console.log("test", userId);
+    try {
+      const input = {
+        id: this.state.yourId,
+        firstName: this.state.firstName
+      };
+      const result = await API.graphql(graphqlOperation(updateUser, { input }));
+      console.log(result);
+      Notification({
+        title: "Success",
+        message: "Event successfully updated!",
+        type: "success",
+        duration: 2000
+      });
+    } catch (err) {
+      console.error(`Failed to update user with id`, err);
+    }
+  };
+
+  // Update Last Name
+  handleUpdateLastName = async () => {
 
     try {
-      this.setState({ handleUpdateFirstName: false });
+      this.setState({ lastNameDialog: false });
+      //this.setState({ handleUpdateLastName: false });
       // const updatedAttributes = {
       //   email: this.state.firstName
       // };
       const input = {
         id: this.state.yourId,
-        firstName: this.state.firstName
+        lastName: this.state.lastName
       };
       const result = await API.graphql(graphqlOperation(updateUser, { input }));
       console.log(result);
@@ -222,6 +266,7 @@ class ProfilePage extends React.Component {
       columns,
       emailDialog,
       firstNameDialog,
+      lastNameDialog,
       email,
       firstName,
       lastName,
@@ -257,11 +302,11 @@ class ProfilePage extends React.Component {
                   },
                   {
                     name: "First Name",
-                    value: user.firstName
+                    value: this.state.firstName
                   },
                   {
                     name: "Last Name",
-                    value: user.lastName
+                    value: this.state.lastName
                   },
                   {
                     name: "Email",
@@ -381,6 +426,35 @@ class ProfilePage extends React.Component {
               </Button>
 
               <Button type="primary" onClick={this.handleUpdateFirstName}>
+                Save
+              </Button>
+            </Dialog.Footer>
+          </Dialog>
+
+          {/* Last Name Dialog */}
+          <Dialog
+            size="large"
+            customClass="dialog"
+            title="Edit Last Name"
+            visible={lastNameDialog}
+            onCancel={() => this.setState({ lastNameDialog: false })}
+          >
+            <Dialog.Body>
+              <Form labelPosition="top">
+                <Form.Item label="Last Name">
+                  <Input
+                    value={lastName}
+                    onChange={lastName => this.setState({ lastName })}
+                  />
+                </Form.Item>
+              </Form>
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Button onClick={() => this.setState({ lastNameDialog: false })}>
+                Cancel
+              </Button>
+
+              <Button type="primary" onClick={this.handleUpdateLastName}>
                 Save
               </Button>
             </Dialog.Footer>

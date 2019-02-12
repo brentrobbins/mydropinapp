@@ -78,7 +78,7 @@ class Event extends React.Component {
                       ${convertCentsToDollars(event.price)}
                     </span>
 
-                    {isEventOwner && <PayButton event={event} user={user} />}
+                    {  <PayButton event={event} user={user} />}
                   </div>
                 </div>
               </Card>
