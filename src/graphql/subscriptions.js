@@ -13,6 +13,7 @@ export const onCreateGroup = `subscription OnCreateGroup {
         eventAt
         price
         owner
+        rosteredCap
         createdAt
       }
       nextToken
@@ -34,6 +35,7 @@ export const onUpdateGroup = `subscription OnUpdateGroup {
         eventAt
         price
         owner
+        rosteredCap
         createdAt
       }
       nextToken
@@ -55,6 +57,7 @@ export const onDeleteGroup = `subscription OnDeleteGroup {
         eventAt
         price
         owner
+        rosteredCap
         createdAt
       }
       nextToken
@@ -69,6 +72,7 @@ export const onCreateEvent = `subscription OnCreateEvent {
     id
     title
     location {
+      id
       title
       address
       city
@@ -89,6 +93,14 @@ export const onCreateEvent = `subscription OnCreateEvent {
     }
     price
     owner
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rosteredCap
     createdAt
   }
 }
@@ -98,6 +110,7 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
     id
     title
     location {
+      id
       title
       address
       city
@@ -118,6 +131,14 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
     }
     price
     owner
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rosteredCap
     createdAt
   }
 }
@@ -127,6 +148,7 @@ export const onDeleteEvent = `subscription OnDeleteEvent {
     id
     title
     location {
+      id
       title
       address
       city
@@ -147,7 +169,198 @@ export const onDeleteEvent = `subscription OnDeleteEvent {
     }
     price
     owner
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rosteredCap
     createdAt
+  }
+}
+`;
+export const onCreateRostered = `subscription OnCreateRostered {
+  onCreateRostered {
+    id
+    event {
+      id
+      title
+      location {
+        id
+        title
+        address
+        city
+        state
+        zipCode
+        country
+      }
+      eventAt
+      group {
+        id
+        title
+        description
+        owner
+        createdAt
+      }
+      price
+      owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
+      createdAt
+    }
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      registered
+      orders {
+        nextToken
+      }
+      rostered {
+        nextToken
+      }
+    }
+    createdAt
+  }
+}
+`;
+export const onUpdateRostered = `subscription OnUpdateRostered {
+  onUpdateRostered {
+    id
+    event {
+      id
+      title
+      location {
+        id
+        title
+        address
+        city
+        state
+        zipCode
+        country
+      }
+      eventAt
+      group {
+        id
+        title
+        description
+        owner
+        createdAt
+      }
+      price
+      owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
+      createdAt
+    }
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      registered
+      orders {
+        nextToken
+      }
+      rostered {
+        nextToken
+      }
+    }
+    createdAt
+  }
+}
+`;
+export const onDeleteRostered = `subscription OnDeleteRostered {
+  onDeleteRostered {
+    id
+    event {
+      id
+      title
+      location {
+        id
+        title
+        address
+        city
+        state
+        zipCode
+        country
+      }
+      eventAt
+      group {
+        id
+        title
+        description
+        owner
+        createdAt
+      }
+      price
+      owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
+      createdAt
+    }
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      registered
+      orders {
+        nextToken
+      }
+      rostered {
+        nextToken
+      }
+    }
+    createdAt
+  }
+}
+`;
+export const onCreateLocation = `subscription OnCreateLocation {
+  onCreateLocation {
+    id
+    title
+    address
+    city
+    state
+    zipCode
+    country
+  }
+}
+`;
+export const onUpdateLocation = `subscription OnUpdateLocation {
+  onUpdateLocation {
+    id
+    title
+    address
+    city
+    state
+    zipCode
+    country
+  }
+}
+`;
+export const onDeleteLocation = `subscription OnDeleteLocation {
+  onDeleteLocation {
+    id
+    title
+    address
+    city
+    state
+    zipCode
+    country
   }
 }
 `;

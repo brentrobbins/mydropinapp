@@ -1,5 +1,9 @@
 import React from "react";
 import { API, graphqlOperation, Auth, Hub } from "aws-amplify";
+
+import { i18n } from 'element-react'
+import locale from 'element-react/src/locale/lang/en'
+
 import { getUser } from "./graphql/queries";
 import { registerUser } from "./graphql/mutations";
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
@@ -9,11 +13,17 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import GroupPage from "./pages/GroupPage";
 import NavBar from "./components/NavBar";
+
+
+
+
 import "./App.css";
 
 export const history = createBrowserHistory();
 
 export const UserContext = React.createContext();
+
+i18n.use(locale);
 
 class App extends React.Component {
   state = {

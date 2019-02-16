@@ -3,12 +3,13 @@ import { API, graphqlOperation } from "aws-amplify";
 import { createEvent } from "../graphql/mutations";
 
 // prettier-ignore
-import { Form, Button, Input, Notification } from "element-react";
+import { Form, Button, Input, Notification, DatePicker } from "element-react";
 import { convertDollarsToCents } from "../utils";
 
 const initialState = {
   title: "",
-  price: ""
+  price: "",
+  eventAt: null
 };
 class NewEvent extends React.Component {
   state = { ...initialState };
@@ -18,6 +19,7 @@ class NewEvent extends React.Component {
       const input = {
         title: this.state.title,
         price: convertDollarsToCents(this.state.price),
+        eventAt: this.state.eventAt,
         eventGroupId: this.props.groupId
       };
       const result = await API.graphql(
@@ -36,7 +38,7 @@ class NewEvent extends React.Component {
   };
 
   render() {
-    const { title, price } = this.state;
+    const { title, price, eventAt } = this.state;
 
     return (
       <div className="flex-center">
@@ -52,7 +54,17 @@ class NewEvent extends React.Component {
                 onChange={title => this.setState({ title })}
               />
             </Form.Item>
-
+            <Form.Item label="Add Event Date">
+            <DatePicker
+            isShowTime={true}
+            placeholder="Pick a day and time"
+            value={eventAt}
+            onChange={date=>{
+                console.log('DatePicker changed: ', date)
+                this.setState({eventAt: date})
+              }}
+             />
+            </Form.Item>
             <Form.Item label="Add Event Price">
               <Input
                 type="number"

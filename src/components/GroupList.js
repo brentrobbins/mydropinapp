@@ -31,11 +31,11 @@ const GroupList = () => {
           <React.Fragment>
             <h2 className="header">
               <img
-                src="https://icon.now.sh/store_mall_directory/527FFF"
+                src="https://icon.now.sh/group/527FFF"
                 alt="store"
                 className="large-icon"
               />
-              Groups
+              DropIn Groups:
             </h2>
             {data.listGroups.items.map(group => (
               <div key={group.id} className="my-2">
@@ -54,13 +54,8 @@ const GroupList = () => {
                       </Link>
 
                       <span style={{ color: "var(--darkAmazonOrange)" }}>
-                        {/* {group.events.items.length} */}
+                         {/* {group.events.items.length}  */}
                       </span>
-
-                      <img
-                        src="https://icon.now.sh/shopping_cart/f60"
-                        alt="cart"
-                      />
 
                       <div style={{ color: "var(--lightSquidInk)" }}>
                         Group Owner {group.owner}

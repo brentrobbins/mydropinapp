@@ -13,6 +13,7 @@ export const getGroup = `query GetGroup($id: ID!) {
         eventAt
         price
         owner
+        rosteredCap
         createdAt
       }
       nextToken
@@ -47,6 +48,7 @@ export const getEvent = `query GetEvent($id: ID!) {
     id
     title
     location {
+      id
       title
       address
       city
@@ -67,6 +69,14 @@ export const getEvent = `query GetEvent($id: ID!) {
     }
     price
     owner
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rosteredCap
     createdAt
   }
 }
@@ -81,6 +91,7 @@ export const listEvents = `query ListEvents(
       id
       title
       location {
+        id
         title
         address
         city
@@ -98,7 +109,122 @@ export const listEvents = `query ListEvents(
       }
       price
       owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
       createdAt
+    }
+    nextToken
+  }
+}
+`;
+export const getRostered = `query GetRostered($id: ID!) {
+  getRostered(id: $id) {
+    id
+    event {
+      id
+      title
+      location {
+        id
+        title
+        address
+        city
+        state
+        zipCode
+        country
+      }
+      eventAt
+      group {
+        id
+        title
+        description
+        owner
+        createdAt
+      }
+      price
+      owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
+      createdAt
+    }
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      registered
+      orders {
+        nextToken
+      }
+      rostered {
+        nextToken
+      }
+    }
+    createdAt
+  }
+}
+`;
+export const listRostereds = `query ListRostereds(
+  $filter: ModelRosteredFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRostereds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      event {
+        id
+        title
+        eventAt
+        price
+        owner
+        rosteredCap
+        createdAt
+      }
+      user {
+        id
+        username
+        firstName
+        lastName
+        email
+        registered
+      }
+      createdAt
+    }
+    nextToken
+  }
+}
+`;
+export const getLocation = `query GetLocation($id: ID!) {
+  getLocation(id: $id) {
+    id
+    title
+    address
+    city
+    state
+    zipCode
+    country
+  }
+}
+`;
+export const listLocations = `query ListLocations(
+  $filter: ModelLocationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      address
+      city
+      state
+      zipCode
+      country
     }
     nextToken
   }
@@ -119,134 +245,13 @@ export const getUser = `query GetUser($id: ID!) {
       }
       nextToken
     }
-  }
-}
-`;
-export const searchGroups = `query SearchGroups(
-  $filter: SearchableGroupFilterInput
-  $sort: SearchableGroupSortInput
-  $limit: Int
-  $nextToken: Int
-) {
-  searchGroups(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      title
-      description
-      events {
-        nextToken
-      }
-      owner
-      createdAt
-    }
-    nextToken
-  }
-}
-`;
-export const searchEvents = `query SearchEvents(
-  $filter: SearchableEventFilterInput
-  $sort: SearchableEventSortInput
-  $limit: Int
-  $nextToken: Int
-) {
-  searchEvents(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      title
-      location {
-        title
-        address
-        city
-        state
-        zipCode
-        country
-      }
-      eventAt
-      group {
+    rostered {
+      items {
         id
-        title
-        description
-        owner
         createdAt
       }
-      price
-      owner
-      createdAt
+      nextToken
     }
-    nextToken
-  }
-}
-`;
-export const searchUsers = `query SearchUsers(
-  $filter: SearchableUserFilterInput
-  $sort: SearchableUserSortInput
-  $limit: Int
-  $nextToken: Int
-) {
-  searchUsers(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      username
-      firstName
-      lastName
-      email
-      registered
-      orders {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const searchOrders = `query SearchOrders(
-  $filter: SearchableOrderFilterInput
-  $sort: SearchableOrderSortInput
-  $limit: Int
-  $nextToken: Int
-) {
-  searchOrders(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      event {
-        id
-        title
-        eventAt
-        price
-        owner
-        createdAt
-      }
-      user {
-        id
-        username
-        firstName
-        lastName
-        email
-        registered
-      }
-      createdAt
-    }
-    nextToken
   }
 }
 `;

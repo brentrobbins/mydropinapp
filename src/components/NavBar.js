@@ -1,20 +1,20 @@
 import React from "react";
 import { Menu as Nav, Icon, Button } from "element-react";
 import { NavLink } from "react-router-dom";
+import logo from '../logo.svg';
 
 const Navbar = ({ user, handleSignout }) => (
-  <Nav mode="horizontal" theme="dark" defaultActive="1">
+  <Nav mode="horizontal"  defaultActive="1">
     <div className="nav-container">
       {/* App Title / Icon */}
       <Nav.Item index="1">
         <NavLink to="/">
           <span className="app-title">
             <img
-              src="https://icon.now.sh/account_balance/f90"
+              src={logo}
               alt="App Icon"
               className="app-icon"
             />
-            My DropIn App
           </span>
         </NavLink>
       </Nav.Item>

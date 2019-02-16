@@ -1,16 +1,17 @@
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { convertCentsToDollars, convertDollarsToCents } from "../utils";
+import { convertCentsToDollars, convertDollarsToCents, formatOrderDate } from "../utils";
 import { UserContext } from "../App";
 import PayButton from "../components/PayButton";
 // prettier-ignore
-import { Notification, Popover, Button, Dialog, Card, Form, Input } from "element-react";
+import { Notification, Popover, Button, Dialog, Card, Form, Input, DatePicker } from "element-react";
 import { updateEvent, deleteEvent } from "../graphql/mutations";
 
 class Event extends React.Component {
   state = {
     title: "",
     price: "",
+    eventAt: null,
     updateEventDialog: false,
     deleteEventDialog: false
   };
@@ -18,11 +19,12 @@ class Event extends React.Component {
   handleUpdateEvent = async eventId => {
     try {
       this.setState({ updateEventDialog: false });
-      const { title, price } = this.state;
+      const { title, price, eventAt } = this.state;
       const input = {
         id: eventId,
         title,
-        price: convertDollarsToCents(price)
+        price: convertDollarsToCents(price),
+        eventAt
       };
       const result = await API.graphql(
         graphqlOperation(updateEvent, { input })
@@ -61,7 +63,7 @@ class Event extends React.Component {
   };
 
   render() {
-    const { updateEventDialog, deleteEventDialog, title, price } = this.state;
+    const { updateEventDialog, deleteEventDialog, title, price, eventAt } = this.state;
     const { event } = this.props;
 
     return (
@@ -77,8 +79,11 @@ class Event extends React.Component {
                     <span className="mx-1">
                       ${convertCentsToDollars(event.price)}
                     </span>
+                    <div>
+                    {formatOrderDate(event.eventAt)}
+                    </div>
 
-                    {  <PayButton event={event} user={user} />}
+                    <PayButton event={event} user={user} />
                   </div>
                 </div>
               </Card>
@@ -94,6 +99,7 @@ class Event extends React.Component {
                         this.setState({
                           updateEventDialog: true,
                           title: event.title,
+                          eventAt: event.eventAt,
                           price: convertCentsToDollars(event.price)
                         })
                       }
@@ -162,6 +168,18 @@ class Event extends React.Component {
                           this.setState({ updateEventDialog: false })
                         }
                       />
+                    </Form.Item>
+
+                    <Form.Item label="Updated Event Date">
+                    <DatePicker
+                    isShowTime={true}
+                    placeholder="Update the Event Date and Time"
+                    value={eventAt}
+                    onChange={date=>{
+                        console.log('DatePicker changed: ', date)
+                        this.setState({eventAt: date})
+                      }}
+                    />
                     </Form.Item>
 
                     <Form.Item label="Updated Price">

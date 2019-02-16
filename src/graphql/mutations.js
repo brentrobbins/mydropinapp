@@ -13,6 +13,7 @@ export const createGroup = `mutation CreateGroup($input: CreateGroupInput!) {
         eventAt
         price
         owner
+        rosteredCap
         createdAt
       }
       nextToken
@@ -34,6 +35,7 @@ export const updateGroup = `mutation UpdateGroup($input: UpdateGroupInput!) {
         eventAt
         price
         owner
+        rosteredCap
         createdAt
       }
       nextToken
@@ -55,6 +57,7 @@ export const deleteGroup = `mutation DeleteGroup($input: DeleteGroupInput!) {
         eventAt
         price
         owner
+        rosteredCap
         createdAt
       }
       nextToken
@@ -69,6 +72,7 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
     id
     title
     location {
+      id
       title
       address
       city
@@ -89,6 +93,14 @@ export const createEvent = `mutation CreateEvent($input: CreateEventInput!) {
     }
     price
     owner
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rosteredCap
     createdAt
   }
 }
@@ -98,6 +110,7 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
     id
     title
     location {
+      id
       title
       address
       city
@@ -118,6 +131,14 @@ export const updateEvent = `mutation UpdateEvent($input: UpdateEventInput!) {
     }
     price
     owner
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rosteredCap
     createdAt
   }
 }
@@ -127,6 +148,7 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
     id
     title
     location {
+      id
       title
       address
       city
@@ -147,7 +169,198 @@ export const deleteEvent = `mutation DeleteEvent($input: DeleteEventInput!) {
     }
     price
     owner
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rosteredCap
     createdAt
+  }
+}
+`;
+export const createRostered = `mutation CreateRostered($input: CreateRosteredInput!) {
+  createRostered(input: $input) {
+    id
+    event {
+      id
+      title
+      location {
+        id
+        title
+        address
+        city
+        state
+        zipCode
+        country
+      }
+      eventAt
+      group {
+        id
+        title
+        description
+        owner
+        createdAt
+      }
+      price
+      owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
+      createdAt
+    }
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      registered
+      orders {
+        nextToken
+      }
+      rostered {
+        nextToken
+      }
+    }
+    createdAt
+  }
+}
+`;
+export const updateRostered = `mutation UpdateRostered($input: UpdateRosteredInput!) {
+  updateRostered(input: $input) {
+    id
+    event {
+      id
+      title
+      location {
+        id
+        title
+        address
+        city
+        state
+        zipCode
+        country
+      }
+      eventAt
+      group {
+        id
+        title
+        description
+        owner
+        createdAt
+      }
+      price
+      owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
+      createdAt
+    }
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      registered
+      orders {
+        nextToken
+      }
+      rostered {
+        nextToken
+      }
+    }
+    createdAt
+  }
+}
+`;
+export const deleteRostered = `mutation DeleteRostered($input: DeleteRosteredInput!) {
+  deleteRostered(input: $input) {
+    id
+    event {
+      id
+      title
+      location {
+        id
+        title
+        address
+        city
+        state
+        zipCode
+        country
+      }
+      eventAt
+      group {
+        id
+        title
+        description
+        owner
+        createdAt
+      }
+      price
+      owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
+      createdAt
+    }
+    user {
+      id
+      username
+      firstName
+      lastName
+      email
+      registered
+      orders {
+        nextToken
+      }
+      rostered {
+        nextToken
+      }
+    }
+    createdAt
+  }
+}
+`;
+export const createLocation = `mutation CreateLocation($input: CreateLocationInput!) {
+  createLocation(input: $input) {
+    id
+    title
+    address
+    city
+    state
+    zipCode
+    country
+  }
+}
+`;
+export const updateLocation = `mutation UpdateLocation($input: UpdateLocationInput!) {
+  updateLocation(input: $input) {
+    id
+    title
+    address
+    city
+    state
+    zipCode
+    country
+  }
+}
+`;
+export const deleteLocation = `mutation DeleteLocation($input: DeleteLocationInput!) {
+  deleteLocation(input: $input) {
+    id
+    title
+    address
+    city
+    state
+    zipCode
+    country
   }
 }
 `;
@@ -160,6 +373,13 @@ export const registerUser = `mutation RegisterUser($input: CreateUserInput!) {
     email
     registered
     orders {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
+    rostered {
       items {
         id
         createdAt
@@ -184,6 +404,13 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
       }
       nextToken
     }
+    rostered {
+      items {
+        id
+        createdAt
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -194,6 +421,7 @@ export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
       id
       title
       location {
+        id
         title
         address
         city
@@ -211,6 +439,10 @@ export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
       }
       price
       owner
+      rostered {
+        nextToken
+      }
+      rosteredCap
       createdAt
     }
     user {
@@ -221,6 +453,9 @@ export const createOrder = `mutation CreateOrder($input: CreateOrderInput!) {
       email
       registered
       orders {
+        nextToken
+      }
+      rostered {
         nextToken
       }
     }

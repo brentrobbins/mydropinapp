@@ -8,8 +8,14 @@ import {
 import { getGroup } from "../graphql/queries";
 import { Loading, Icon, Tabs } from "element-react";
 import { Link } from "react-router-dom";
+
+import { formatOrderDate } from "../utils";
+
 import NewEvent from "../components/NewEvent";
 import Event from "../components/Event";
+
+
+
 class GroupPage extends React.Component {
   state = {
     group: null,
@@ -67,6 +73,7 @@ class GroupPage extends React.Component {
   }
 
   componentWillUnmount() {
+
     this.createEventListener.unsubscribe();
     this.updatedEventListener.unsubscribe();
     this.deleteEventListener.unsubscribe();
@@ -104,12 +111,12 @@ class GroupPage extends React.Component {
 
         {/* Group MetaData */}
         <span className="items-center pt-2">
-          <h2 className="mb-mr">{group.title}</h2> - {group.owner}
+          <h2 className="mb-mr">{group.title}</h2>
         </span>
         <div className="items-center pt-2">
           <span style={{ color: "var(--lightSquidInk)", paddingBottom: "1em" }}>
             <Icon name="date" className="icon" />
-            {group.createdAt}
+            {formatOrderDate(group.createdAt)}
           </span>
         </div>
 

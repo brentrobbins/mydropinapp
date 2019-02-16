@@ -24,7 +24,7 @@ const PayButton = ({ event, user }) => {
   const handleCharge = async token => {
     try {
       const ownerEmail = await getOwnerEmail(event.owner);
-      const result = await API.post("mydropinappOrderLambda", "/charge", {
+      const result = await API.post("orderlambda", "/charge", {
         body: {
           token,
           charge: {

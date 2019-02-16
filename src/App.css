@@ -86,7 +86,7 @@ body {
 }
 
 .app-icon {
-  height: 30px;
+  height: 40px;
   padding-bottom: 5px;
   padding-right: 5px;
 }
@@ -146,10 +146,28 @@ body {
     display: none !important;
   }
 }
+.el-menu--horizontal .el-menu-item {
+  color: #fff;
+}
+.el-menu.el-menu--horizontal .el-menu-item:hover {
+  background-color: #3d71ff;
+}
+
+.el-button.el-button--warning {
+  color: #ffffff;
+  background-color: #4d7aff;
+  border-color: #ffffff;
+}
+.el-button.el-button--warning:focus, .el-button.el-button--warning:hover {
+  color: #4d7aff;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
 
 .nav-container {
   display: flex;
   flex-wrap: wrap;
+  padding: 0 5em 0 5em;
 }
 
 .nav-link {
@@ -198,9 +216,9 @@ body {
 .market-title {
   font-weight: 300;
   border-radius: 10px;
-  text-decoration: #f90 solid underline;
-  text-underline-position: under;
-  text-decoration-style: wavy;
+  text-decoration: #527fff solid underline;
+  /* text-underline-position: under;
+  text-decoration-style: wavy; */
   font-size: 2.5rem;
   display: flex;
   color: var(--lightSquidInk);
@@ -290,4 +308,14 @@ body {
   .hide-xs {
     display: none;
   }
+}
+
+
+
+.nav-container {
+  background-color: #527fff;
+  color: #fff;
+}
+.app-title a {
+  color: #fff;
 }
