@@ -1,7 +1,7 @@
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { getUser } from "../graphql/queries";
-import { createOrder } from "../graphql/mutations";
+import { createOrder, createRostered } from "../graphql/mutations";
 import { Notification, Message } from "element-react";
 import { history } from "../App";
 import StripeCheckout from "react-stripe-checkout";
@@ -41,6 +41,8 @@ const PayButton = ({ event, user }) => {
       });
       console.log({ result });
       if (result.charge.status === "succeeded") {
+
+
         //createOrder
         const input = {
           orderUserId: user.attributes.sub,
@@ -49,7 +51,20 @@ const PayButton = ({ event, user }) => {
         const order = await API.graphql(
           graphqlOperation(createOrder, { input })
         );
-        console.log(order);
+        console.log('order:', order);
+
+
+        //createRegistered
+        const inputRoster = {
+          rosteredUserId: user.attributes.sub,
+          rosteredEventId: event.id
+        };
+        const rostered = await API.graphql(
+          graphqlOperation(createRostered, { input:inputRoster })
+        );
+        console.log('rostered:', rostered);
+        
+
         Notification({
           title: "Success",
           message: `${result.message}`,

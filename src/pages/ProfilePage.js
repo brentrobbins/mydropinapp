@@ -27,9 +27,37 @@ const getUser = `query GetUser($id: ID!) {
       }
       nextToken
     }
+    rostered {
+      items {
+        id
+        event {
+          id
+          title
+        }
+      }
+    }
   }
 }
 `;
+
+/*
+
+query {
+  getUser(id:"2ca94d29-1f66-44a3-8121-04d917239d01"){
+    id
+    rostered {
+      items {
+        id
+        event {
+          id
+          title
+        }
+      }
+    }
+    
+  }
+}
+*/
 
 class ProfilePage extends React.Component {
   state = {
@@ -271,7 +299,8 @@ class ProfilePage extends React.Component {
       firstName,
       lastName,
       verificationForm,
-      verificationCode
+      verificationCode,
+      rostered
     } = this.state;
     const { user, userAttributes } = this.props;
 
